@@ -35,6 +35,11 @@ public:
     }
 };
 
+
+Example 2:
+Input: nums = [0,1,0,3,2,3]
+Output: 4
+
 Another Solution:
 
 class Solution {
@@ -52,7 +57,7 @@ public:
                 l++;
             }
             else{
-                int index = lower_bound(temp.begin(),temp.end(),nums[i])- temp.begin()
+                int index = lower_bound(temp.begin(),temp.end(),nums[i])- temp.begin();
                 temp[index] = nums[i];
             }
         }
