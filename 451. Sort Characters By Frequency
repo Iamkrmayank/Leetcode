@@ -1,0 +1,40 @@
+451. Sort Characters By Frequency
+
+Given a string s, sort it in decreasing order based on the frequency of the characters. The frequency of a character is the number of times it appears in the string.
+Return the sorted string. If there are multiple answers, return any of them.
+
+Example 1:
+Input: s = "tree"
+Output: "eert"
+
+Example 2:
+Input: s = "cccaaa"
+Output: "aaaccc"
+
+Example 3:
+Input: s = "Aabb"
+Output: "bbAa"
+
+Solution:
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> mp;
+        string ans="";
+        for(int i=0;i<s.length();i++)
+        {
+            mp[s[i]]++;
+        }
+        priority_queue<pair<int,char>> pq;
+        for(auto it:mp){
+            pq.push({it.second,it.first});
+        }
+        while(!pq.empty()){
+            for(int i=1;i<=pq.top().first;i++){
+                ans += pq.top().second;
+            }
+            pq.pop();
+        }
+        return ans;
+    }
+};        
