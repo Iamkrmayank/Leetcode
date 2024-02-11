@@ -1,0 +1,40 @@
+647. Palindromic Substrings
+
+Given a string s, return the number of palindromic substrings in it.
+A string is a palindrome when it reads the same backward as forward.
+A substring is a contiguous sequence of characters within the string.
+
+Example 1:
+Input: s = "abc"
+Output: 3
+
+Example 2:
+Input: s = "aaa"
+Output: 6
+
+Solution:
+class Solution 
+{
+private:
+    string t;
+    int check(int l, int r, int ans = 0)
+    {
+        while(l >= 0 and r <= t.size())
+        {
+            if(t[l--] == t[r++]) ans++;
+            else break;
+        }
+        return ans;
+    }
+public:
+    int countSubstrings(string s) 
+    {
+        int n = size(s), ans = 0;t = s;
+        for(int i = 0; i < n; i++)
+        {
+            ans += check(i,i);    // odd length palindromes
+            ans += check(i,i+1); // even length palindromes
+        }
+        return ans;
+    }
+};
