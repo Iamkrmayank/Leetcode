@@ -1,0 +1,43 @@
+2108. Find First Palindromic String in the Array
+
+Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty string "".
+A string is palindromic if it reads the same forward and backward.
+
+Example 1:
+Input: words = ["abc","car","ada","racecar","cool"]
+Output: "ada"
+
+Example 2:
+Input: words = ["notapalindrome","racecar"]
+Output: "racecar"
+
+Example 3:
+Input: words = ["def","ghi"]
+Output: ""
+
+Solution:
+class Solution {
+public:
+    string firstPalindrome(vector<string>& words) {
+        
+    for (int i = 0; i < words.size(); i++)
+    {
+        string word = words[i];
+        bool c = true;
+        for (int j = 0; j < word.size(); j++)
+        {
+            if (word[j] != word[word.size() - 1 - j])
+            {
+                c = false;
+                break;
+            }
+        }
+        if(c)
+        {
+            return words[i];
+        }
+    }
+    return "";
+
+    }
+};
