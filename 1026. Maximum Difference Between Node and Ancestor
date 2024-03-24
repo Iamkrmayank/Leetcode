@@ -8,6 +8,7 @@ Output: 7
 
 Solution:
 
+
 class Solution {
 public:
     int maxAncestorDiff(TreeNode* root) {
