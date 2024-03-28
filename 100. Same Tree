@@ -16,6 +16,7 @@ Input: p = [1,2,1], q = [1,1,2]
 Output: false
 
 Solution:
+
 class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
