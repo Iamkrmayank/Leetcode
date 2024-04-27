@@ -1,0 +1,54 @@
+402. Remove K Digits
+
+Given string num representing a non-negative integer num, and an integer k, 
+return the smallest possible integer after removing k digits from num.
+
+Example 1:
+Input: num = "1432219", k = 3
+Output: "1219"
+
+Example 2:
+Input: num = "10200", k = 1
+Output: "200"
+
+Example 3:
+Input: num = "10", k = 2
+Output: "0"
+
+Solution:
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        stack<char> st;
+        int n = num.size();
+        if (k >= n) {
+            return "0";
+        }
+        for (int i = 0; i < n; i++) {
+            while (k > 0 && !st.empty() && st.top() > num[i]) {
+                st.pop();
+                k--;
+            }
+            st.push(num[i]);
+        }
+        while (k > 0 && !st.empty()) {
+            st.pop();
+            k--;
+        }
+        string ans;
+        while (!st.empty()) {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        int i = 0;
+        while (i< ans.size() && ans[i] == '0') {
+            i++;
+        }
+        ans = ans.substr(i);
+        if (ans.empty()) { 
+            return "0";
+        }
+        return ans;
+    }
+};
