@@ -1,0 +1,60 @@
+2487. Remove Nodes From Linked List
+
+You are given the head of a linked list.
+Remove every node which has a node with a greater value anywhere to the right side of it.
+Return the head of the modified linked list.
+
+Example 1:
+Input: head = [5,2,13,3,8]
+Output: [13,8]
+Explanation: The nodes that should be removed are 5, 2 and 3.
+- Node 13 is to the right of node 5.
+- Node 13 is to the right of node 2.
+- Node 8 is to the right of node 3.
+
+Example 2:
+Input: head = [1,1,1,1]
+Output: [1,1,1,1]
+Explanation: Every node has value 1, so no nodes are removed.
+
+Solution:
+class Solution {
+public:
+    ListNode* removeNodes(ListNode* head) {
+       // Step 1: Reverse the linked list
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        ListNode* next = nullptr;
+        while (curr != nullptr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }    
+        head = prev;  // Now 'head' is the last element, which is the start of the reversed list
+        // Step 2: Traverse reversed list and keep only nodes with maximum value
+        ListNode* new_head = head;
+        int max_so_far = head->val;
+        curr = head->next;
+        ListNode* last_valid = head;
+        while (curr != nullptr) {
+            if (curr->val >= max_so_far) {
+                max_so_far = curr->val;
+                last_valid->next = curr;  // Include the node in the new list
+                last_valid = curr;       // Move the last valid pointer
+            }
+            curr = curr->next;
+        }
+        last_valid->next = nullptr;  // Ensure the list is terminated correctly
+        // Step 3: Reverse the list again to get the correct order
+        prev = nullptr;
+        curr = new_head;
+        while (curr != nullptr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;  // This is the head of the corrected list
+    }
+};
